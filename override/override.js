@@ -230,6 +230,7 @@ const proxyGroups = [
     ...groupBaseOption,
     "name": "手动选择",
     "type": "select",
+    "proxies": ["延时优选"],
     "include-all": true,
     "icon": "https://fastly.jsdelivr.net/gh/xiaofanshifu/vpn@main/icon/manual.svg"
   },
@@ -315,7 +316,6 @@ const rules = [
   "DOMAIN-SUFFIX,aistudio.google.com,AI",
   "DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI",
   "DOMAIN-SUFFIX,daily-cloudcode-pa.googleapis.com,AI",
-  "DOMAIN-SUFFIX,pkgs.org,DIRECT",
   "DOMAIN-SUFFIX,v2rayse.com,延时优选",
   "DOMAIN-SUFFIX,opencloudos.org,延时优选",
   "DOMAIN-SUFFIX,techpowerup.com,手动选择",
