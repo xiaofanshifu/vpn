@@ -43,8 +43,8 @@ const dnsConfig = {
   "fake-ip-range": "198.18.0.1/16",
   // fake-ip 模式下的 IP 过滤
   "fake-ip-filter": [
-    //匹配 localhost 等没有.的主机名
-    "*",
+    // 匹配 localhost 等没有.的主机名
+    // "*",
     // 本地主机/设备
     "+.lan",
     "+.local",
