@@ -5,13 +5,18 @@ const domesticNameservers = [
   "https://dns.alidns.com/dns-query",
   "https://doh.360.cn/dns-query",
   "tls://dot.360.cn",
+  "https://123.125.81.6/dns-query",
   "https://101.226.4.6/dns-query",
-  "tls://101.198.198.198:853"
+  "tls://101.198.198.198:853",
+  "https://doh.pub/dns-query",
+  "https://120.53.53.53/dns-query",
+  "tls://dot.pub"
 ];
 // 国外 DNS 服务器
 const foreignNameservers = [
   "https://dns.cloudflare.com/dns-query",
   "tls://1dot1dot1dot1.cloudflare-dns.com",
+  "tls://one.one.one.one",
   "https://8.8.8.8/dns-query",
   "https://dns.google/dns-query",
   "https://dns.twnic.tw/dns-query",
@@ -43,8 +48,6 @@ const dnsConfig = {
   "fake-ip-range": "198.18.0.1/16",
   // fake-ip 模式下的 IP 过滤
   "fake-ip-filter": [
-    // 匹配 localhost 等没有.的主机名
-    // "*",
     // 本地主机/设备
     "+.lan",
     "+.local",
@@ -62,8 +65,8 @@ const dnsConfig = {
     "+.qq.com"
   ],
   // 用于解析 DNS 服务器的域名，必须是 ip
-  "default-nameserver": ["https://223.6.6.6/dns-query", "https://1.12.12.12/dns-query", "https://101.226.4.6/dns-query"],
-  // 代理节点（机场域名）域名解析服务器，仅用于解析代理节点的域名，填写国内的即可，因为正常国外dns无法链接
+  "default-nameserver": ["https://223.6.6.6/dns-query", "quic://223.5.5.5:853", "https://1.12.12.12/dns-query", "https://120.53.53.53/dns-query", "https://101.226.4.6/dns-query", "tls://101.198.198.198:853"],
+  // 解析代理节点域名 DNS 服务器（仅用于解析代理节点的域名，填写国内的即可，因为正常国外 dns 无法链接）
   "proxy-server-nameserver": [...domesticNameservers],
   // 默认的域名解析服务器，域名解析兜底
   "nameserver": [...domesticNameservers],
@@ -93,10 +96,7 @@ const ruleProviders = {
   // 直连域名列表
   "direct": {
     ...ruleProviderCommon,
-    // behavior 根据 url 类型决定
-    // classical：经典的格式，形如 DOMAIN-SUFFIX,google.com
-    // domain 域名，形如 +.google.com
-    // ipcidr：cidr 的 ip
+    // behavior 根据 url 类型决定。classical：经典的格式，形如 DOMAIN-SUFFIX,google.com；domain 域名，形如 +.google.com；ipcidr：cidr 的 ip
     "behavior": "domain",
     "url": "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt",
     "path": "./ruleset/loyalsoldier/direct.yaml"
@@ -210,7 +210,7 @@ const ruleProviders = {
 // 代理组通用配置
 const groupBaseOption = {
   // 代理组健康检查间隔，单位秒
-  "interval": 20,
+  "interval": 30,
   // 健康检查超时时间，单位毫秒
   "timeout": 1000,
   // 健康检查 url。不使用其他 url，耗流量，https 和 http 流量销毁差不多
@@ -237,7 +237,7 @@ const proxyGroups = [
   {
     ...groupBaseOption,
     "url": "https://chatgpt.com/",
-    "expected-status": "200",
+    "expected-status": 200,
     "name": "AI",
     "type": "select",
     "proxies": ["手动选择"],
@@ -308,6 +308,16 @@ const proxyGroups = [
 // 规则（规则的顺序影响分流）
 const rules = [
   // 自定义规则
+  "DOMAIN-SUFFIX,ipip.net,DIRECT",
+  "DOMAIN-SUFFIX,checkip.amazonaws.com,DIRECT",
+  "DOMAIN-SUFFIX,icanhazip.com,DIRECT",
+  "DOMAIN-SUFFIX,ipinfo.io,手动选择",
+  "DOMAIN-SUFFIX,ipdata.co,手动选择",
+  "DOMAIN-SUFFIX,ip.me,手动选择",
+  "DOMAIN-SUFFIX,ip-api.com,手动选择",
+  "DOMAIN-SUFFIX,ip.network,手动选择",
+  "DOMAIN-SUFFIX,ping0.cc,手动选择",
+  
   "DOMAIN-SUFFIX,lastpass.com,DIRECT",
   "DOMAIN-SUFFIX,pkgs.org,DIRECT",
   "DOMAIN-SUFFIX,arena.ai,AI",
@@ -347,6 +357,7 @@ const rules = [
   "RULE-SET,cncidr,DIRECT,no-resolve",
   "RULE-SET,applications,DIRECT",
   "RULE-SET,gfw,手动选择",
+  "RULE-SET,geolocation-!cn,延时优选",
   // 其他规则
   "MATCH,漏网之鱼"
 ];
