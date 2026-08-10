@@ -317,6 +317,7 @@ const rules = [
   "DOMAIN-SUFFIX,ip-api.com,手动选择",
   "DOMAIN-SUFFIX,ip.network,手动选择",
   "DOMAIN-SUFFIX,ping0.cc,手动选择",
+  "DOMAIN-SUFFIX,ip.sb,手动选择",
   
   "DOMAIN-SUFFIX,lastpass.com,DIRECT",
   "DOMAIN-SUFFIX,pkgs.org,DIRECT",
