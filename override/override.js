@@ -325,6 +325,7 @@ const rules = [
   "DOMAIN-SUFFIX,chatgpt.com,AI",
   "DOMAIN-SUFFIX,openai.com,AI",
   "DOMAIN-SUFFIX,aistudio.google.com,AI",
+  "DOMAIN-SUFFIX,openrouter.ai,AI",
   "DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI",
   "DOMAIN-SUFFIX,daily-cloudcode-pa.googleapis.com,AI",
   "DOMAIN-SUFFIX,v2rayse.com,延时优选",
