@@ -1,0 +1,2 @@
+# 统一行尾为 LF，避免编辑器保存时转成 CRLF 造成假 diff
+* text=auto eol=lf
