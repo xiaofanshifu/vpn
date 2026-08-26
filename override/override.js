@@ -281,7 +281,7 @@ const proxyGroups = [
     ...groupBaseOption,
     "name": "微软服务",
     "type": "select",
-    "proxies": ["DIRECT", "手动选择", "延时优选"],
+    "proxies": ["手动选择", "DIRECT", "延时优选"],
     "include-all": true,
     "icon": "https://fastly.jsdelivr.net/gh/xiaofanshifu/vpn@main/icon/microsoft.svg"
   },
