@@ -299,7 +299,7 @@ const proxyGroups = [
     ...groupBaseOption,
     "name": "漏网之鱼",
     "type": "select",
-    "proxies": ["延时优选", "手动选择", "DIRECT"],
+    "proxies": ["手动选择", "延时优选", "DIRECT"],
     "include-all": true,
     "icon": "https://fastly.jsdelivr.net/gh/xiaofanshifu/vpn@main/icon/fish.svg"
   }
